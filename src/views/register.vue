@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { Notify } from 'vant';
 import { register } from '../api/user'
 export default {
     data() {
@@ -36,7 +37,8 @@ export default {
                 password: this.password
 
             })
-            console.log(res);
+            Notify({ type: 'success', message: '注册成功' });
+            this.$router.push('/login')
         }
     },
 }

@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { Notify } from 'vant'
+import { login } from '../api/user'
 export default {
     data() {
         return {
@@ -26,8 +28,15 @@ export default {
         }
     },
     methods: {
-        onSubmit(values) {
-            console.log('submit', values);
+        async onSubmit(values) {
+            const res = await login({
+                username: this.username,
+                password: this.password,
+
+            })
+            Notify({ type: 'success', message: '登录成功' });
+
+            console.log(res);
         },
     },
 }

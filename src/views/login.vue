@@ -19,6 +19,7 @@
 <script>
 import { Notify } from 'vant'
 import { login } from '../api/user'
+import { saveToken } from '../utils/token'
 export default {
     data() {
         return {
@@ -35,7 +36,8 @@ export default {
 
             })
             Notify({ type: 'success', message: '登录成功' });
-
+            saveToken(res.data.data.token)
+            this.$router.push("/index")
             console.log(res);
         },
     },

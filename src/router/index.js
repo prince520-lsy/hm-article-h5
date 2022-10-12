@@ -41,10 +41,10 @@ const routes = [
     path: "/collection",
     component: Collection,
   },
-  // {
-  //   path: "*",
-  //   component: NotFound,
-  // }
+  {
+    path: "*",
+    component: NotFound,
+  }
 ]
 
 const router = new VueRouter({
@@ -52,7 +52,7 @@ const router = new VueRouter({
 })
 
 // router.beforeEach((to, from, next) => {
-//   console.log(1, to);
+//   // console.log(to);
 
 //   if (to.path === '/login' || to.path === '/register') {
 //     next();
@@ -90,3 +90,10 @@ const router = new VueRouter({
 
 
 export default router
+
+
+
+
+
+
+

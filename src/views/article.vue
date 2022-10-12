@@ -9,21 +9,48 @@
                 </van-tabs>
 
             </template>
-            <template #right>左</template>
+            <template #right><span class="article-logo">面经</span></template>
         </van-nav-bar>
+        <article-item></article-item>
     </div>
 </template>
 
 <script>
+
+import { getArticleList } from '../api/article'
 export default {
     data() {
         return {
-            active: 2
+            active: 0,
+            current: 1,
+
+        }
+    },
+    created() {
+        this.loadArticleList();
+    },
+    methods: {
+        async loadArticleList() {
+            const res = await getArticleList({
+                current: this.current,
+                sorter: this.active === 0 ? "weight_desc" : "",
+            })
+            console.log(res);
         }
     }
+
 }
 </script>
 
-<style>
-
+<style scoped>
+.article-logo {
+    font-size: 30px;
+    color: orange;
+    font-weight: 700;
+}
 </style>
+
+
+
+
+

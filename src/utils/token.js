@@ -1,7 +1,7 @@
 //sava token
 
 export function saveToken(token) {
-    localStorage.setItem('Token', token)
+    localStorage.setItem('token', token)
 }
 //getToken
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="artile-item">
+    <div class="artile-item" @click="$router.push(`/article-detail/${id}`)">
         <!-- 作者部分 -->
         <div class="author-info">
             <img class="avatar" :src="article.avatar" alt="头像" />
@@ -12,7 +12,7 @@
         </div>
         <!-- 内容部分 -->
         <p class="article-content">
-            {{ article.content }}
+            {{ cleanContent }}
         </p>
         <!-- 文章状态 -->
         <div class="author-state">

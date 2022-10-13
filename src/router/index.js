@@ -12,7 +12,7 @@ import Collection from '../views/collection.vue';
 import Favorite from '../views/favorite.vue';
 import Myself from '../views/myself.vue';
 import { getToken } from '../utils/token';
-
+import ArticleDetail from '../views/article-detail.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -62,6 +62,11 @@ const routes = [
         component: Myself,
       },
     ]
+  },
+  {
+    //必须参数：内嵌传参
+    path: '/article-detail/:id',
+    component: ArticleDetail,
   },
   // 配置404页面
   // 新增页面一定要放在404之前

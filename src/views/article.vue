@@ -100,7 +100,7 @@ export default {
     data() {
         return {
             active: 0,
-            current: 1,
+            current: 38,
             articleList: [],
             loading: true,
             finished: false,
@@ -131,6 +131,8 @@ export default {
                 // 如果加载不是第一页，把数据拼接到当前列表
                 this.articleList = [...this.articleList, ...res.data.data.rows];
             }
+            this.finished = this.current >= res.data.data.pageTotal
+
             // 关闭加载中
             this.loading = false;
         },

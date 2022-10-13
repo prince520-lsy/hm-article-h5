@@ -10,34 +10,72 @@
             <!-- 作者信息 -->
             <div>
                 <!-- 标题 -->
-                <h1 class="article-title">诗经</h1>
+                <h1 class="article-title">{{article.stem}}</h1>
                 <!-- 时间 -->
                 <div class="article-state">
-                    20220-01-20 00:00:00| 282浏览量 | 145 点赞数
+                    {{article.createdAt}}| {{article.views}}浏览量 | {{article.likeCount}} 点赞数
                 </div>
                 <!-- 作者 -->
                 <div class="author-info">
-                    <img class="avatar"
-                        src="https://ts1.cn.mm.bing.net/th?id=OIP-C.x09r5tGxTyGiAchyk-KCjQAAAA&w=99&h=100&c=8&rs=1&qlt=90&o=6&dpr=1.25&pid=3.1&rm=2"
-                        alt="" />
-                    <span>佚名</span>
+                    <img class="avatar" :src="article.avatar" alt="" />
+                    <span>{{article.creator}}</span>
                 </div>
             </div>
             <!-- 面经内容 -->
-            <div class="article-content">关关雎鸠，在河之洲，窈窕淑女，君子好逑</div>
+            <div class="article-content" v-html="article.content"></div>
         </div>
 
         <!-- 点赞/收藏 -->
-        <div>点赞</div>
-        <div>收藏</div>
+        <div class="like-container" :class="{active:article.likeFlag===1}" @click="like">
+            <van-icon class="operation-icon" name="like-o" />
+        </div>
+        <div class="collect-container" @click="collet" :class="{active:article.collectFlag===1}">
+            <van-icon class="operation-icon" name="star-o" />
+        </div>
     </div>
 </template>
   
 <script>
-export default {};
+import { getArticleDetail, likeOrCollect } from '../api/article'
+export default {
+    created() {
+        this.loadArticle()
+    },
+    data() {
+        return {
+            article: {}
+        }
+    },
+    methods: {
+        //点赞
+        async like() {
+            await likeOrCollect({
+                id: this.$route.params.id,
+                optType: 1
+            })
+            this.loadArticle()
+        },
+        //收藏
+        async collet() {
+            await likeOrCollect({
+                id: this.$route.params.id,
+                optType: 2
+            })
+            this.loadArticle()
+        },
+        async loadArticle() {
+            let res = await getArticleDetail(this.$route.params.id)
+            console.log(res);
+            this.article = res.data.data
+        }
+    },
+
+
+
+};
 </script>
   
-<style scoped>
+<style scoped lang="less">
 .back {
     color: #fa6d1d;
 }
@@ -71,5 +109,40 @@ export default {};
 
 .article-content {
     margin-top: 16px;
+}
+
+.like-container,
+.collect-container {
+    position: fixed;
+    bottom: 100px;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 5px 5px 25px #ccc;
+    background-color: #fff;
+
+    &.active {
+        background-color: #FEC635;
+
+        .operation-icon {
+            color: #fff;
+        }
+    }
+}
+
+.like-container {
+    right: 16px;
+}
+
+.collect-container {
+    right: 78px;
+}
+
+.operation-icon {
+    font-size: 22px;
+    color: grey;
 }
 </style>

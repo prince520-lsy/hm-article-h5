@@ -85,7 +85,7 @@ const router = new VueRouter({
 // 可以用于控制是否允许访问该页面，这种也叫页面鉴权
 router.beforeEach((to, from, next) => {
   // 检查登录
-  console.log(1, to);
+  // console.log(1, to);
   // 判断404页面
   // todo，404页面判断
   if (to.path === '/login' || to.path === '/register') {

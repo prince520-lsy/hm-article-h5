@@ -1,5 +1,5 @@
 <template>
-    <div class="artile-item" @click="$router.push(`/article-detail/${id}`)">
+    <div class="artile-item" @click="$router.push(`/article-detail/${article.id}`)">
         <!-- 作者部分 -->
         <div class="author-info">
             <img class="avatar" :src="article.avatar" alt="头像" />
@@ -23,8 +23,11 @@
   
 <script>
 export default {
+
     props: {
         article: Object,
+
+
     },
     computed: {
         cleanContent() {

@@ -8,3 +8,7 @@ export function register(data) {
 export function login(user) {
     return request.post('user/login', user)
 }
+
+export function getUserInfo() {
+    return request.get('/user/currentUser')
+}

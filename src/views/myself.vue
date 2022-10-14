@@ -85,7 +85,7 @@ export default {
             <van-cell title="推荐分享" is-link />
             <van-cell title="意见反馈" is-link />
             <van-cell title="关于我们" is-link />
-            <van-cell title="退出登录" is-link />
+            <van-cell title="退出登录" is-link @click="logout" />
         </van-cell-group>
     </div>
 </template>
@@ -93,6 +93,7 @@ export default {
 <script>
 import { Toast } from 'vant';
 import { getUserInfo } from '../api/user'
+import { deleteToken } from '../utils/token.js'
 export default {
     async created() {
         let res = await getUserInfo()
@@ -118,6 +119,14 @@ export default {
             Toast(option.name);
             this.showShare = false;
         },
+        logout() {
+            if (confirm("您确认退出吗？")) {
+                deleteToken();
+                this.$router.push('/login')
+            }
+
+
+        }
 
     },
 };
